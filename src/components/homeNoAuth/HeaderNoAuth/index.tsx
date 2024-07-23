@@ -8,9 +8,9 @@ const HeaderNoAuth = function () {
   return (
 	<>
 		<div className={styles.ctaSection}>
-			<img src="/homeNotAuth/logoLangflix.png" alt="logoCta" className={styles.imgCta}/>
+			<img src="/homeNoAuth/logoLangflix.svg" alt="logoCta" className={styles.imgCta}/>
       <p>Se cadastre para ter acesso aos cursos</p>
-			<img src="/homeNotAuth/logoLangflix.png" alt="logoCta" className={styles.imgCta}/>
+			<img src="/homeNoAuth/logoLangflix.svg" alt="logoCta" className={styles.imgCta}/>
 		</div>
 		<Container className={styles.nav}>
 			<img src="logoLangflix.svg" alt="logoLangflix" className={styles.imgLogoNav}/>

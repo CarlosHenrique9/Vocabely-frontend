@@ -9,7 +9,7 @@
 }
 
 .imgCta {
-    width: 20px;
+    width: 40px;
 }
 
 .nav {
@@ -20,13 +20,16 @@
 }
 
 .imgLogoNav {
-    width: 180px;
+    width: 700px;
+    margin-top: -230px;
+    margin-left: -279px;
 }
 
 .navBtn {
-    margin: 0px 5px;
+    margin: 0px 150px 0px -140px;
     border-color: transparent;
     color: $lightGray;
+    transition: 0.5ms;
     &:hover {
         border-color: $secondaryGreen;
         color: white;
@@ -34,7 +37,10 @@
     }
 }
 
-@media (max-width: 442px) {
+@media (max-width: 456px) {
+    .ctaSection {
+        gap: 10px;
+    }
     .nav {
         justify-content: center;
     }
@@ -43,12 +49,9 @@
         border-color: white;
         font-size: 14px;
     }
-    .ctaSection {
-        gap: 10px;
-    }
 }
 
-@media (max-width: 329px) {
+@media (max-width: 335px) {
     .ctaSection {
         text-align: center;
     }
