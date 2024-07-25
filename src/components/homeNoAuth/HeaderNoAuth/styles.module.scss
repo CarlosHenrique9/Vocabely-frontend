@@ -1,6 +1,6 @@
 @import "../../../../styles/colors.module.scss";
 .ctaSection {
-    background-color: $secondaryGreen;
+    background-color: $accentYellow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +22,7 @@
 .imgLogoNav {
     width: 700px;
     margin-top: -230px;
-    margin-left: -279px;
+    margin-left: -180px;
 }
 
 .navBtn {
@@ -31,7 +31,7 @@
     color: $lightGray;
     transition: 0.5ms;
     &:hover {
-        border-color: $secondaryGreen;
+        border-color: $accentYellow;
         color: white;
         background-color: transparent;
     }

@@ -1,14 +1,14 @@
 @import "../../../../styles/colors.module.scss";
 .subTitle {
+    margin-left: 20px;
     margin-top: -300px;
-    margin-left: -80px;
     font-size: 18px;
     font-weight: bold;
-    color: $secondaryGreen;
+    color: $accentYellow;
 }
 
 .title {
-    margin-left: -80px;
+    margin-left: 20px;
     font-size: 40px;
     font-weight: bold;
     line-height: 50px;
@@ -17,7 +17,7 @@
 .description {
     font-size: 20px;
     color: $lightGray;
-    margin: 20px 0px 40px -80px;
+    margin: 20px 0px 40px 20px;
 }
 
 .link {
@@ -25,27 +25,29 @@
 }
 
 .btnCta {
-    margin-left: -80px;
+    margin-left: 20px;
     font-weight: bold;
     color: white;
     display: flex;
     align-items: center;
     gap: 25px;
     padding: 14px 30px;
-    border: 2px solid $secondaryGreen;
+    border: 2px solid $accentYellow;
     .btnImg {
         width: 11px;
     }
     &:hover {
-        border-color: $primaryBlue;
+        border-color: chocolate;
         color: $lightGray;
         background-color: transparent;
     }
 }
 
 .imgPresentation {
-    width: 650px;
+    width: 630px;
+    margin-left: 100px;
     margin-top: -390px;
+    padding-left: 60px;
 }
 
 .arrowDown {
