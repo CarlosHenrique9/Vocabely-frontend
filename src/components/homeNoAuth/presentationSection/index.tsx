@@ -34,8 +34,8 @@ import Link from "next/link";
           </Col>
           <Col md>
             <img
-              src="/homeNoAuth/imgPresentation.png"
-              alt="imgIndex"
+              src=""
+              alt=""
               className={styles.imgPresentation}
             />
           </Col>
