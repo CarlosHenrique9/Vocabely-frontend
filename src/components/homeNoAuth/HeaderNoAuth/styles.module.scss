@@ -1,10 +1,11 @@
 @import "../../../../styles/colors.module.scss";
+
 .ctaSection {
     background-color: $accentYellow;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4px 0px;
+    padding: 4px 0;
     gap: 30px;
 }
 
@@ -15,25 +16,45 @@
 .nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     margin-top: 20px;
+    padding: 0 20px;
 }
 
 .imgLogoNav {
-    width: 700px;
-    margin-top: -230px;
-    margin-left: -180px;
+    width: 600px; /* Ajuste conforme necessário */
+    margin: 0;
 }
 
 .navBtn {
-    margin: 0px 150px 0px -140px;
+    margin: 0 20px;
     border-color: transparent;
     color: $lightGray;
-    transition: 0.5ms;
+    transition: 0.5s;
     &:hover {
         border-color: $accentYellow;
         color: white;
         background-color: transparent;
+    }
+}
+
+@media (max-width: 991px) {
+    .imgLogoNav {
+        width: 150px; /* Ajuste conforme necessário */
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgLogoNav {
+        margin-bottom: 10px;
+    }
+    .navBtn {
+        margin: 10px 0;
     }
 }
 
@@ -43,11 +64,14 @@
     }
     .nav {
         justify-content: center;
+        padding: 0 10px;
     }
     .navBtn {
-        margin: 16px 10px;
-        border-color: white;
+        margin: 10px 0;
         font-size: 14px;
+    }
+    .imgLogoNav {
+        width: 120px; /* Ajuste conforme necessário */
     }
 }
 
@@ -56,6 +80,9 @@
         text-align: center;
     }
     .imgCta {
-        margin: 0px 8px;
+        margin: 0 8px;
+    }
+    .navBtn {
+        font-size: 12px;
     }
 }

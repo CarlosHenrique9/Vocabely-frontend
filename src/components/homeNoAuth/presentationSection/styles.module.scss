@@ -1,23 +1,31 @@
 @import "../../../../styles/colors.module.scss";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
 .subTitle {
-    margin-left: 20px;
-    margin-top: -300px;
     font-size: 18px;
     font-weight: bold;
     color: $accentYellow;
+    margin: 20px 0 0 20px; /* Alinhando com o .title */
 }
 
 .title {
-    margin-left: 20px;
     font-size: 40px;
     font-weight: bold;
     line-height: 50px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .description {
     font-size: 20px;
     color: $lightGray;
-    margin: 20px 0px 40px 20px;
+    margin: 20px 0 40px 20px;
 }
 
 .link {
@@ -25,7 +33,6 @@
 }
 
 .btnCta {
-    margin-left: 20px;
     font-weight: bold;
     color: white;
     display: flex;
@@ -33,21 +40,25 @@
     gap: 25px;
     padding: 14px 30px;
     border: 2px solid $accentYellow;
-    .btnImg {
-        width: 11px;
-    }
-    &:hover {
-        border-color: chocolate;
-        color: $lightGray;
-        background-color: transparent;
-    }
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.btnImg {
+    width: 11px;
+}
+
+.btnCta:hover {
+    border-color: chocolate;
+    color: $lightGray;
+    background-color: transparent;
 }
 
 .imgPresentation {
-    width: 630px;
-    margin-left: 100px;
-    margin-top: -390px;
+    width: 100%;
+    max-width: 630px;
     padding-left: 60px;
+    object-fit: cover; /* Ensures the image covers the container without stretching */
 }
 
 .arrowDown {
@@ -56,18 +67,37 @@
 
 @media (max-width: 1199px) and (min-width: 991px) {
     .title {
-        font-size: 20px;
-        line-height: 30px;
+        font-size: 30px;
+        line-height: 40px;
     }
+
     .description {
-        font-size: 14px;
+        font-size: 16px;
+    }
+
+    .imgPresentation {
+        margin: 30px auto;
     }
 }
 
 @media (max-width: 991px) {
+    .container {
+        align-items: center;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
     .imgPresentation {
-        display: flex;
-        margin: 50px auto;
+        width: 90%;
+        margin: 20px auto;
     }
 }
 
@@ -76,14 +106,18 @@
         font-size: 26px;
         line-height: 34px;
     }
+
     .description {
         font-size: 14px;
     }
+
     .btnCta {
         padding: 10px 24px;
     }
+
     .imgPresentation {
         width: 95%;
+        padding-left: 0; /* Remove padding to avoid white space */
     }
 }
 
@@ -91,10 +125,17 @@
     .subTitle {
         font-size: 14px;
     }
+
     .title {
         font-size: 20px;
     }
+
     .description {
         font-size: 12px;
+    }
+
+    .imgPresentation {
+        width: 100%;
+        padding-left: 0; /* Ensure no white space */
     }
 }

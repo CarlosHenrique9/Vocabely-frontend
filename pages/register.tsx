@@ -34,23 +34,33 @@ const Register = function () {
       return;
     }
 
-    const { data, status } = await authService.register(params);
+    try {
+      const response = await authService.register(params);
+      const { data, status } = response;
 
-    if (status === 201) {
-      router.push("/login?success=true");
-    } else {
+      if (status === 201) {
+        router.push("/login?success=true");
+      } else {
+        setToastIsOpen(true);
+        setToastMessage(data?.message || "Registration failed. Please try again.");
+        setTimeout(() => {
+          setToastIsOpen(false);
+        }, 3000);
+      }
+    } catch (error) {
       setToastIsOpen(true);
-      setToastMessage(data.message);
+      setToastMessage("An error occurred during registration. Please try again.");
       setTimeout(() => {
         setToastIsOpen(false);
       }, 3000);
+      console.error("Registration error:", error);
     }
   };
 
   return (
     <>
       <Head>
-        <title>Langflix - Registro</title>
+        <title>Vocabely - Registro</title>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
         <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
         <script src="https://jsuites.net/v4/jsuites.js"></script>
@@ -58,7 +68,7 @@ const Register = function () {
       <main className={styles.main}>
         <HeaderGeneric logoUrl="/" btnUrl="/login" btnContent="Quero fazer login" />
         <Container className="py-5">
-          <p className={styles.formTitle}>Bem-vindo(a) ao LangFlix!</p>
+          <p className={styles.formTitle}>Bem-vindo(a) ao Vocabely!</p>
           <Form className={styles.form} onSubmit={handleRegister}>
             <FormGroup>
               <Label for="firstName" className={styles.label}>NOME</Label>

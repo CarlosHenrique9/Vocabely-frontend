@@ -8,12 +8,12 @@ const HeaderNoAuth = function () {
   return (
 	<>
 		<div className={styles.ctaSection}>
-			<img src="/homeNoAuth/logoLangflix.svg" alt="logoCta" className={styles.imgCta}/>
+			<img src="/favicon.png" alt="logoCta" className={styles.imgCta}/>
       <p>Cadastre-se para ter acesso aos cursos</p>
-			<img src="/homeNoAuth/logoLangflix.svg" alt="logoCta" className={styles.imgCta}/>
+			<img src="favicon.png" alt="logoCta" className={styles.imgCta}/>
 		</div>
 		<Container className={styles.nav}>
-			<img src="logoLangflix.svg" alt="logoLangflix" className={styles.imgLogoNav}/>
+			<img src="vocabely.svg" alt="logoLangflix" className={styles.imgLogoNav}/>
 			<div>
 				<Link href="/login">
 					<Button className={styles.navBtn} outline>Entrar</Button>
