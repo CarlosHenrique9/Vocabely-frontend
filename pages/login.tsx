@@ -18,6 +18,12 @@ const [toastColor, setToastColor] = useState("");
 const [toastIsOpen, setToastIsOpen] = useState(false);
 const [toastMessage, setToastMessage] = useState("");
 
+useEffect(() => {
+	if (sessionStorage.getItem("vocabely-token")) {
+	  router.push("/home");
+  }
+}, [router]);
+
 const registerSucess = router.query.registred;
 useEffect(() => {
   if (registerSucess === "true") {
@@ -55,7 +61,7 @@ const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     <>
       <Head>
         <title>Vocabely - Login</title>
-        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </Head>
       <main className={styles.main}>
         <HeaderGeneric logoUrl="/" btnUrl="/register" btnContent="Quero fazer parte" />
