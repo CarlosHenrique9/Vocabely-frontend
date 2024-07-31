@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 import { Container, Form, Input } from "reactstrap";
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -29,7 +29,7 @@ const HeaderAuth = function () {
     <Container className={styles.nav}>
       <Link href="/home">
         <img
-          src="/logoLangflix.svg"
+          src="/logoVocabely.svg"
           alt="logoVocabely"
           className={styles.imgLogoNav}
         />

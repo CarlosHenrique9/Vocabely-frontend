@@ -5,8 +5,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4px 0;
-    gap: 30px;
+    padding: 10px 20px;
+    gap: 20px;
+    border-radius: 3px;
 }
 
 .imgCta {
@@ -18,30 +19,36 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 20px;
     padding: 0 20px;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
 .imgLogoNav {
-    width: 600px; /* Ajuste conforme necessário */
+    max-width: 250px;
+    height: auto;
     margin: 0;
+    margin-top: 0px;
 }
 
 .navBtn {
-    margin: 0 20px;
-    border-color: transparent;
+    margin: 0px 15px;
+    border: 2px solid transparent;
     color: $lightGray;
-    transition: 0.5s;
-    &:hover {
-        border-color: $accentYellow;
-        color: white;
-        background-color: transparent;
-    }
+    padding: 8px 15px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.navBtn:hover {
+    border-color: $accentYellow;
+    color: white;
+    background-color: transparent;
 }
 
 @media (max-width: 991px) {
     .imgLogoNav {
-        width: 150px; /* Ajuste conforme necessário */
+        width: 150px;
     }
 }
 
@@ -55,6 +62,7 @@
     }
     .navBtn {
         margin: 10px 0;
+        font-size: 16px;
     }
 }
 
@@ -67,11 +75,10 @@
         padding: 0 10px;
     }
     .navBtn {
-        margin: 10px 0;
         font-size: 14px;
     }
     .imgLogoNav {
-        width: 120px; /* Ajuste conforme necessário */
+        width: 120px;
     }
 }
 
