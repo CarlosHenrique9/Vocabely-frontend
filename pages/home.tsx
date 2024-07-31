@@ -1,5 +1,6 @@
 import HeaderAuth from "@/src/components/common/headerAuth";
 import FeaturedSection from "@/src/components/homeAuth/featuresSection";
+import NewestCategory from "@/src/components/homeAuth/newestCategory/index.";
 import Head  from "next/head";
 import router from "next/router";
 import { useEffect } from "react";
@@ -18,6 +19,7 @@ const HomeAuth = function () {
       </Head>
       <main>
         <FeaturedSection />
+        <NewestCategory />
       </main>
     </>
   );
