@@ -9,10 +9,8 @@ export type CategoryType = {
 };
 
 const categoriesService = {
-
   getCategories: async () => {
     const token = sessionStorage.getItem("vocabely-token");
-
     const res = await api
     .get("/categories", {
     headers: {
@@ -20,16 +18,14 @@ const categoriesService = {
     },
     })
     .catch((error) => {
-      console.log(error.response.data.message);
-
       return error.response;
+
     });
 
     return res;
   },
   getCourses: async (id: number) => {
     const token = sessionStorage.getItem("vocabely-token");
-
     const res = await api
     .get(`/categories/${id}`, {
     headers: {
@@ -37,14 +33,12 @@ const categoriesService = {
     },
     })
     .catch((error) => {
-      console.log(error.response.data.message);
-
       return error.response;
+
     });
 
     return res;
   },
 };
-
 
 export default categoriesService

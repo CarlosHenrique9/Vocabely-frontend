@@ -1,3 +1,4 @@
+import Footer from "@/src/components/common/footer";
 import HeaderAuth from "@/src/components/common/headerAuth";
 import FavoriteCategory from "@/src/components/homeAuth/favoriteCategory";
 import FeaturedCategory from "@/src/components/homeAuth/featuredCategory";
@@ -10,7 +11,7 @@ import { useEffect } from "react";
 
 const HomeAuth = function () {
   useEffect(() => {
-    if (sessionStorage.getItem("onebitflix-token")) {
+    if (sessionStorage.getItem("vocabely-token")) {
       router.push("/home");
     }
   }, []);
@@ -26,6 +27,7 @@ const HomeAuth = function () {
         <FavoriteCategory />
         <FeaturedCategory />
         <ListCategories />
+        <Footer />
       </main>
     </>
   );
