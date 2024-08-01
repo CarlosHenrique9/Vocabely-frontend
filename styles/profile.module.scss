@@ -1,19 +1,9 @@
 @import "./colors.module.scss";
-.page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content-wrap {
-  flex: 1;
-}
 
 .form {
-  border: 1px solid $darkGray;
-  padding: 20px;
+  border: 1px solid $mediumGray;
+  padding: 20px 0;
   max-width: 100%;
-  margin: 0 auto;
 }
 
 .formName {
@@ -45,7 +35,6 @@
   word-break: break-all;
 }
 
-// Tempo de Membro
 .memberTime {
   display: flex;
   justify-content: center;
@@ -53,7 +42,7 @@
 }
 
 .memberTimeImg {
-  width: 20px;
+  width: 40px;
 }
 
 .memberTimeText {
@@ -61,30 +50,30 @@
   color: $lightGray;
 }
 
-// Labels
 .label {
   font-size: 14px;
   font-weight: bold;
 }
 
-// Inputs Flexíveis
 .inputFlexDiv {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-.inputFlex {
-  width: 250px;
+.inputFlex, .input {
+  width: 100%;
+  max-width: 550px;
   background-color: transparent;
-  border: 1px solid $darkGray;
+  border: 1px solid $mediumGray;
   color: white;
   transition: 0.3s;
-  text-transform: uppercase;
+
   &::placeholder {
     color: $lightGray;
   }
+
   &:focus {
     box-shadow: none;
     border-color: $accentYellow;
@@ -93,22 +82,6 @@
   }
 }
 
-// Inputs Normais
-.inputNormalDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  gap: 20px;
-}
-
-.input {
-  @extend .inputFlex;
-  text-transform: lowercase;
-  width: 550px;
-}
-
-// Botões
 .formBtn {
   border-color: $accentYellow;
   text-align: center;
@@ -117,25 +90,36 @@
   font-size: 15px;
   padding: 6px 20px;
   transition: 0.4s;
+  width: 200px;
+  margin-top: 20px;
+
   &:hover {
     border-color: chocolate;
     background-color: transparent;
     color: $lightGray;
   }
+
   &:focus {
     box-shadow: none;
     outline: none;
   }
 }
 
+.title {
+  font-size: 45px;
+  font-weight: bold;
+  padding: 0 0 50px 0;
+}
+
 .renderFormBtn {
   display: block;
   width: 200px;
-  border: 1px solid $darkGray;
+  border: 1px solid $mediumGray;
   color: white;
   font-weight: bold;
   margin: 0 auto;
   padding: 14px 0;
+
   &:hover {
     background-color: transparent;
     border-color: $accentYellow;
@@ -143,24 +127,15 @@
   }
 }
 
-// Título
-.title {
-  font-size: 45px;
-  font-weight: bold;
-  padding: 0 0 50px 0;
-  text-align: center; // Centraliza o título horizontalmente
-}
-
-// Header e Footer
 .header, .footer {
   background-color: black;
 }
 
-// Media Queries
 @media (max-width: 991px) {
   .title {
     text-align: center;
   }
+
   .btnColumn {
     width: 100%;
     margin-bottom: 40px;
@@ -169,10 +144,11 @@
 
 @media (max-width: 767px) {
   .inputFlexDiv {
-    gap: 30px;
+    gap: 20px;
   }
+
   .inputFlex, .input {
-    width: 400px;
+    width: 100%;
   }
 }
 
@@ -180,24 +156,24 @@
   .title {
     font-size: 35px;
   }
+
   .formName {
     width: 95%;
   }
+
   .nameAbbreviation {
     font-size: 30px;
     min-width: 60px;
     min-height: 60px;
   }
+
   .userName {
     font-size: 30px;
   }
 }
 
 @media (max-width: 435px) {
-  .inputFlex {
-    width: 100%;
-  }
-  .input {
+  .inputFlex, .input {
     width: 100%;
   }
 }

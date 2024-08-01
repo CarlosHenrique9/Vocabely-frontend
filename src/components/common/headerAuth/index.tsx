@@ -1,16 +1,45 @@
-
+/* eslint-disable @next/next/no-img-element */
 import { Container, Form, Input } from "reactstrap";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import profileService from "@/src/services/profileService";
 
+// Define o elemento onde o modal será montado
 Modal.setAppElement("#__next");
 
 const HeaderAuth = function () {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const [initials, setInitials] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user = await profileService.fetchCurrent();
+        if (user && user.firstName && user.lastName) {
+          const firstNameInitial = user.firstName.slice(0, 1);
+          const lastNameInitial = user.lastName.slice(0, 1);
+          setInitials(firstNameInitial + lastNameInitial);
+        } else {
+          console.error('User data is missing or incomplete:', user);
+          setInitials('NA');
+        }
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+        setError('Failed to load user data');
+        setInitials('NA');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -49,7 +78,7 @@ const HeaderAuth = function () {
           className={styles.searchImg}
         />
         <p className={styles.userProfile} onClick={handleOpenModal}>
-          AB
+          {loading ? "Carregando..." : initials}
         </p>
       </div>
       <Modal
