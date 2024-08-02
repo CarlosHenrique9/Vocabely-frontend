@@ -2,12 +2,15 @@ import styles from "../../../../styles/slideCategory.module.scss";
 import useSWR from "swr";
 import courseService from "../../../services/courseService";
 import SlideComponent from "../../common/slideComponent";
+import PageSpinner from "./../../common/spinner/index";
 
 const FeaturedCategory = function () {
   const { data, error } = useSWR("/featured", courseService.getFeaturedCourses);
 
   if (error) return <p>Erro ao carregar os cursos em destaque</p>;
-  if (!data) return <p>Carregando...</p>;
+  if (!data) {
+    return <PageSpinner />
+  }
 
   return (
     <>
