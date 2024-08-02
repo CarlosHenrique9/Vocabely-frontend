@@ -122,12 +122,22 @@
 
   &:hover {
     background-color: transparent;
-    border-color: $accentYellow;
-    color: $lightGray;
+    color: $accentYellow;
+  }
+  &:active{
+    background-color: transparent;
+  }
+  &:focus{
+    background-color: transparent;
+    box-shadow: none;
   }
 }
 
-.header, .footer {
+.header {
+  background-color: black;
+}
+ .footer {
+  margin-top: 100px;
   background-color: black;
 }
 
