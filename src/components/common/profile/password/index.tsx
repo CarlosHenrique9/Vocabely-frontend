@@ -3,10 +3,69 @@ import { Button, Form } from "reactstrap";
 import { FormGroup } from "reactstrap";
 import { Input } from "reactstrap";
 import { Label } from "reactstrap";
+import ToastComponent from "../../toast";
+import { FormEvent, useEffect, useState } from "react";
+import profileService from "@/src/services/profileService";
 
 const PasswordForm= function () {
+  const [currentPassword, setCurrentPassword] = useState("");
+const [newPassword, setNewPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+const [color, setColor] = useState("");
+const [toastIsOpen, setToastIsOpen] = useState(false);
+const [errorMessage, setErrorMessage] = useState("");
+
+useEffect(() => {
+	profileService.fetchCurrent().then((password) => {
+	  setCurrentPassword(password.currentPassword);
+    setNewPassword(password.newPassword);
+  });
+}, []);
+
+const handlePasswordUpdate = async function (event: FormEvent<HTMLFormElement>) {
+	event.preventDefault();
+
+	if (newPassword != confirmPassword) {
+	  setToastIsOpen(true);
+    setErrorMessage("Senha e confirmação de senha diferentes!");
+    setColor("bg-danger");
+    setTimeout(() => setToastIsOpen(false), 1000 * 3);
+
+    return;
+  }
+  if (currentPassword === newPassword) {
+	  setToastIsOpen(true);
+    setErrorMessage("Não coloque a nova senha igual a senha antiga!");
+    setColor("bg-danger");
+    setTimeout(() => setToastIsOpen(false), 1000 * 3);
+
+    return;
+  };
+  const res = await profileService.passwordUpdate({
+	  currentPassword,
+    newPassword,
+  });
+  if (res === 204) {
+    setToastIsOpen(true);
+    setErrorMessage("Senha alterada com sucesso");
+    setColor("bg-success");
+    setTimeout(() => setToastIsOpen(false), 1000 * 3);
+
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+
+  }
+  if (res === 400) {
+    setToastIsOpen(true);
+    setErrorMessage("Senha atual incorreta!");
+    setColor("bg-danger");
+    setTimeout(() => setToastIsOpen(false), 1000 * 3);
+  }
+};
+
   return <>
-	<Form className={styles.form}>
+	<Form onSubmit={handlePasswordUpdate} className={styles.form}>
 	  <div className={styles.inputFlexDiv}>
 	    <FormGroup>
 	      <Label className={styles.label} for="currentPassword">
@@ -20,6 +79,10 @@ const PasswordForm= function () {
         required
         minLength={6}
         maxLength={12}
+        value={currentPassword}
+        onChange={(event) => {
+          setCurrentPassword(event.currentTarget.value);
+        }}
         className={styles.input}
         />
       </FormGroup>
@@ -37,6 +100,10 @@ const PasswordForm= function () {
         required
         minLength={6}
         maxLength={12}
+        value={newPassword}
+        onChange={(event) => {
+          setNewPassword(event.currentTarget.value);
+        }}
         className={styles.inputFlex}
         />
       </FormGroup>
@@ -52,17 +119,25 @@ const PasswordForm= function () {
 	      required
         minLength={6}
         maxLenth={12}
-        max
+        value={confirmPassword}
+        onChange={(event) => {
+          setConfirmPassword(event.currentTarget.value);
+        }}
 	      className={styles.inputFlex}
 	      />
 	    </FormGroup>
 
-      <Button className={styles.formBtn} outline>
+      <Button type="submit" className={styles.formBtn} outline>
 	      Salvar Alterações
       </Button>
     </div>
   </Form>
-</>
+  <ToastComponent
+	color={color}
+  isOpen={toastIsOpen}
+  message={errorMessage}
+  />
+</>;
 };
 
 export default PasswordForm;
