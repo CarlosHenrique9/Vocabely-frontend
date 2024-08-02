@@ -49,7 +49,6 @@ const courseService = {
         }
       )
       .catch((error) => {
-        console.log(error.response.data.message);
         return error.response;
       });
     return res;
@@ -64,7 +63,6 @@ const courseService = {
         data: { courseId },
       })
       .catch((error) => {
-        console.log(error.response.data.message);
         return error.response;
       });
     return res;
@@ -78,12 +76,25 @@ const courseService = {
         },
       })
       .catch((error) => {
-        console.log(error.response.data.message);
-
         return error.response;
       });
 
       return res;
+  },
+  getSearch: async (name: string) => {
+    const token = sessionStorage.getItem("vocabely-token");
+
+    const res = await api
+    .get(`/courses/search?name=${name}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    })
+    .catch((error) => {
+      return error.response;
+    });
+
+    return res;
   },
 };
 
