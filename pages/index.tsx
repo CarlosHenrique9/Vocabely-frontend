@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "../styles/homeNoAuth.module.scss"
+import styles from "../styles/homeNoAuth.module.scss";
 import HeaderNoAuth from "@/src/components/homeNoAuth/HeaderNoAuth";
 import { PresentationSection } from "@/src/components/homeNoAuth/presentationSection";
 import CardsSection from "@/src/components/homeNoAuth/HeaderNoAuth/cardsSection";
@@ -16,7 +16,7 @@ interface IndexPageProps {
   course: CourseType[];
 }
 
-const HomeNoAuth = ({course}: IndexPageProps) => {
+const HomeNoAuth = ({ course }: IndexPageProps) => {
   useEffect(() => {
     AOS.init();
   }, []);
@@ -26,23 +26,30 @@ const HomeNoAuth = ({course}: IndexPageProps) => {
       <Head>
         <title>Vocabely</title>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-				<meta property="og:title" content="Langflix" key="title" />
-				<meta name="description" content="Tenha acesso aos melhores conteúdos de idiomas de uma forma simples e fácil." />
+        <meta property="og:title" content="Langflix" key="title" />
+        <meta
+          name="description"
+          content="Tenha acesso aos melhores conteúdos de idiomas de uma forma simples e fácil."
+        />
       </Head>
       <main>
-	<div className={styles.sectionBackground} data-aos="fade-zoom-in" data-aos-duration="1600">
-		<HeaderNoAuth />
-		<PresentationSection />
-	</div>
-	<div data-aos="fade-right" data-aos-duration="1200">
-		<CardsSection />
-	</div>
-	<div data-aos="fade-up" data-aos-duration="1350">
-		<SlideSection newestCourses={course} />
-	</div>
-	<Footer />
-</main>
-</>
+        <div
+          className={styles.sectionBackground}
+          data-aos="fade-zoom-in"
+          data-aos-duration="1600"
+        >
+          <HeaderNoAuth />
+          <PresentationSection />
+        </div>
+        <div data-aos="fade-right" data-aos-duration="1200">
+          <CardsSection />
+        </div>
+        <div data-aos="fade-up" data-aos-duration="1350">
+          <SlideSection newestCourses={course} />
+        </div>
+        <Footer />
+      </main>
+    </>
   );
 };
 

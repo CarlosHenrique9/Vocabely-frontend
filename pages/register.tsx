@@ -1,6 +1,6 @@
+import Head from "next/head";
 import HeaderGeneric from "@/src/components/common/headerGeneric";
 import styles from "../styles/registerLogin.module.scss";
-import Head from "next/head";
 import { Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
 import Footer from "@/src/components/common/footer";
 import { FormEvent, useEffect, useState } from "react";
@@ -34,9 +34,7 @@ const Register = function () {
     if (password !== confirmPassword) {
       setToastIsOpen(true);
       setToastMessage("Senha e confirmação diferentes.");
-      setTimeout(() => {
-        setToastIsOpen(false);
-      }, 3000);
+      setTimeout(() => setToastIsOpen(false), 3000);
       return;
     }
 
@@ -49,16 +47,12 @@ const Register = function () {
       } else {
         setToastIsOpen(true);
         setToastMessage(data?.message || "Registration failed. Please try again.");
-        setTimeout(() => {
-          setToastIsOpen(false);
-        }, 3000);
+        setTimeout(() => setToastIsOpen(false), 3000);
       }
     } catch (error) {
       setToastIsOpen(true);
       setToastMessage("An error occurred during registration. Please try again.");
-      setTimeout(() => {
-        setToastIsOpen(false);
-      }, 3000);
+      setTimeout(() => setToastIsOpen(false), 3000);
       console.error("Registration error:", error);
     }
   };
