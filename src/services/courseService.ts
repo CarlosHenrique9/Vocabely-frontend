@@ -56,7 +56,7 @@ const courseService = {
   removeFav: async (courseId: number | string) => {
     const token = sessionStorage.getItem("vocabely-token");
     const res = await api
-      .delete("/favorites", {
+      .delete(`/favorites${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +82,7 @@ const courseService = {
       return res;
   },
   like: async (courseId: number | string) => {
-    const token = sessionStorage.getItem("onebitflix-token");
+    const token = sessionStorage.getItem("vocabely-token");
 
     const res = await api
     .post(
