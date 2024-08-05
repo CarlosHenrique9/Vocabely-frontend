@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.searchContainer {
+  flex: 1 0 auto;
+}
 .noSearchResult {
   text-align: center;
   padding: 20px;
