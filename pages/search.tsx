@@ -4,6 +4,9 @@ import HeaderAuth from "../src/components/common/headerAuth";
 import { useRouter } from "next/router";
 import { useEffect, useState, useCallback } from "react";
 import courseService, { CourseType } from "@/src/services/courseService";
+import { Container } from "reactstrap";
+import SearchCard from "@/src/components/common/searchCard";
+import Footer from "@/src/components/common/footer";
 
 const Search = function () {
   const router = useRouter();
@@ -21,20 +24,30 @@ const Search = function () {
     searchCourses();
   }, [searchCourses]);
 
-
   return (
     <>
       <Head>
         <title>Vocabely - {searchName}</title>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </Head>
-      <main>
-        <HeaderAuth />
-        {searchResult?.map((course) => (
-          <div key={course.id}>
-            <p>{course.name}</p>
+      <main className={styles.main}>
+        <div className={styles.header}>
+          <HeaderAuth />
+        </div>
+        {searchResult.length >= 1 ? (
+        <div className={styles.searchResult}>
+            <Container className="d-flex flex-wrap justify-content-center gap-5 py-4">
+              {searchResult?.map((course) => (
+                <SearchCard key={course.id} course={course} />
+              ))}
+            </Container>
           </div>
-        ))}
+          ) : (
+            <p className={styles.noSearchText}>Nenhum resultado encontrado!</p>
+          )}
+        <div className={styles.footer}>
+          <Footer />
+        </div>
       </main>
     </>
   );

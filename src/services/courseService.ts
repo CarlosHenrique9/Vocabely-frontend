@@ -68,7 +68,7 @@ const courseService = {
     return res;
   },
   getFavCourses: async () => {
-    const token = sessionStorage.getItem("vocabley-token");
+    const token = sessionStorage.getItem("vocabely-token");
     const res = await api
       .get("/favorites", {
         headers: {

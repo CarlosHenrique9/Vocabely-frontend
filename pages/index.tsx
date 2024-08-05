@@ -24,7 +24,7 @@ const HomeNoAuth = ({course}: IndexPageProps) => {
   return (
     <>
       <Head>
-        <title>Langlix</title>
+        <title>Vocabely</title>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 				<meta property="og:title" content="Langflix" key="title" />
 				<meta name="description" content="Tenha acesso aos melhores conteúdos de idiomas de uma forma simples e fácil." />
