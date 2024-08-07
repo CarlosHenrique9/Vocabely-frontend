@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost'], // Add other domains if needed
+    domains: ['https://vocabely-back.vercel.app/'], // Add other domains if needed
   },
 };
 
