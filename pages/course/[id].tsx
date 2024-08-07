@@ -3,7 +3,7 @@ import HeaderAuth from "@/src/components/common/headerAuth";
 import styles from "../../styles/coursePage.module.scss";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import courseService, { CourseType } from "@/src/services/courseService";
 import { Button, Container } from "reactstrap";
 import PageSpinner from "@/src/components/common/spinner";
@@ -26,11 +26,7 @@ const CoursePage = function () {
     }
   }, [router]);
 
-  if (loading) {
-    return <PageSpinner />;
-  }
-
-  const getCourse = async () => {
+  const getCourse = useCallback(async () => {
     if (typeof id !== "string") return;
 
     const res = await courseService.getEpisodes(id);
@@ -39,30 +35,30 @@ const CoursePage = function () {
       setLiked(res.data.liked);
       setFavorited(res.data.favorited);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     if (id) {
       getCourse();
     }
-  }, [id]);
+  }, [id, getCourse]);
 
   const handleLikeCourse = async () => {
     if (liked) {
-      await courseService.removeLike(id);
+      await courseService.removeLike(id as string);
       setLiked(false);
     } else {
-      await courseService.like(id);
+      await courseService.like(id as string);
       setLiked(true);
     }
   };
 
   const handleFavCourse = async () => {
     if (favorited) {
-      await courseService.removeFav(id);
+      await courseService.removeFav(id as string);
       setFavorited(false);
     } else {
-      await courseService.addToFav(id);
+      await courseService.addToFav(id as string);
       setFavorited(true);
     }
   };
