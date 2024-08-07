@@ -20,6 +20,7 @@ const EpisodePlayer = function () {
 
   const [getEpisodeTime, setGetEpisodeTime] = useState(0);
   const [episodeTime, setEpisodeTime] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const playerRef = useRef<ReactPlayer>(null);
 
@@ -44,7 +45,6 @@ const EpisodePlayer = function () {
   const handlePlayerTime = () => {
     playerRef.current?.seekTo(getEpisodeTime);
     setIsReady(true);
-
   };
 
   if (isReady === true) {
@@ -68,24 +68,39 @@ const EpisodePlayer = function () {
     }
   };
 
-
   const handleLastEpisode = () => {
     if (episodeOrder > 0) {
       const newEpisodeOrder = episodeOrder - 1;
-      router.push(`/course/episode/${newEpisodeOrder}?courseid=${courseId}&episodeid=${episodeId - 1}`);
+      router.push(
+        `/course/episode/${newEpisodeOrder}?courseid=${courseId}&episodeid=${episodeId - 1}`
+      );
     }
   };
 
   const handleNextEpisode = () => {
     if (course?.episodes && episodeOrder + 1 < course.episodes.length) {
       const newEpisodeOrder = episodeOrder + 1;
-      router.push(`/course/episode/${newEpisodeOrder}?courseid=${courseId}&episodeid=${episodeId + 1}`);
+      router.push(
+        `/course/episode/${newEpisodeOrder}?courseid=${courseId}&episodeid=${episodeId + 1}`
+      );
     }
   };
 
   useEffect(() => {
     getCourse();
   }, [courseId]);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("vocabely-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading) {
+    return <PageSpinner />;
+  }
 
   if (!course || !course.episodes || episodeOrder >= course.episodes.length) {
     return <PageSpinner />;
@@ -104,13 +119,11 @@ const EpisodePlayer = function () {
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
       </Head>
       <main>
-      <HeaderGeneric
-        logoUrl="/logoVocabely.svg"
-        btnContent={`Voltar para o curso`}
-        btnUrl={`/course/${courseId}`}
-      />
-
-
+        <HeaderGeneric
+          logoUrl="/logoVocabely.svg"
+          btnContent={`Voltar para o curso`}
+          btnUrl={`/course/${courseId}`}
+        />
         <Container className="d-flex flex-column align-items-center gap-3 pt-3">
           <p className={styles.episodeTitle}>
             {course.episodes[episodeOrder].name}
@@ -127,7 +140,7 @@ const EpisodePlayer = function () {
               ref={playerRef}
               onStart={handlePlayerTime}
               onProgress={(progress) => {
-              setEpisodeTime(progress.playedSeconds);
+                setEpisodeTime(progress.playedSeconds);
               }}
             />
           )}

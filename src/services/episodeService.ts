@@ -1,9 +1,10 @@
-import api from './api'
+import api from './api';
 
-interface watchTimeParams {
+interface WatchTimeParams {
   episodeId: number;
   seconds: number;
 }
+
 const watchEpisodeService = {
   getWatchTime: async (episodeId: number) => {
     const token = sessionStorage.getItem("vocabely-token");
@@ -22,7 +23,8 @@ const watchEpisodeService = {
 
     return res;
   },
-  setWatchTime: async ({ episodeId, seconds }: watchTimeParams) => {
+
+  setWatchTime: async ({ episodeId, seconds }: WatchTimeParams) => {
     const token = sessionStorage.getItem("vocabely-token");
 
     const res = await api
@@ -45,4 +47,4 @@ const watchEpisodeService = {
   },
 };
 
-export default watchEpisodeService
+export default watchEpisodeService;

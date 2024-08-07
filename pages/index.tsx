@@ -26,7 +26,7 @@ const HomeNoAuth = ({ course }: IndexPageProps) => {
       <Head>
         <title>Vocabely</title>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-        <meta property="og:title" content="Langflix" key="title" />
+        <meta property="og:title" content="Vocabely" key="title" />
         <meta
           name="description"
           content="Tenha acesso aos melhores conteúdos de idiomas de uma forma simples e fácil."
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       course: res.data,
     },
-    revalidate: 3600 * 24,
+    revalidate: 86400, // 24 horas
   };
 };
 

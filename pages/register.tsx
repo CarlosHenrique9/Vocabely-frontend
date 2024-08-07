@@ -21,15 +21,15 @@ const Register = function () {
 
   const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const formData = new FormData(event.currentTarget);
-    const firstName = formData.get("firstName")!.toString();
-    const lastName = formData.get("lastName")!.toString();
-    const phone = formData.get("phone")!.toString();
-    const birth = formData.get("birth")!.toString();
-    const email = formData.get("email")!.toString();
-    const password = formData.get("password")!.toString();
-    const confirmPassword = formData.get("confirmPassword")!.toString();
-    const params = { firstName, lastName, phone, birth, email, password };
+    const firstName = formData.get("firstName")?.toString() || "";
+    const lastName = formData.get("lastName")?.toString() || "";
+    const phone = formData.get("phone")?.toString() || "";
+    const birth = formData.get("birth")?.toString() || "";
+    const email = formData.get("email")?.toString() || "";
+    const password = formData.get("password")?.toString() || "";
+    const confirmPassword = formData.get("confirmPassword")?.toString() || "";
 
     if (password !== confirmPassword) {
       setToastIsOpen(true);
@@ -39,7 +39,7 @@ const Register = function () {
     }
 
     try {
-      const response = await authService.register(params);
+      const response = await authService.register({ firstName, lastName, phone, birth, email, password });
       const { data, status } = response;
 
       if (status === 201) {

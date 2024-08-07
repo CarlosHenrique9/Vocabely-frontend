@@ -11,18 +11,29 @@ interface Props {
 
 const ListCategoriesSlide = function ({ categoryId, categoryName }: Props) {
   const { data, error } = useSWR(
-    `/categories/${categoryId}`, () => categoriesService.getCourses(categoryId)
+    `/categories/${categoryId}`,
+    () => categoriesService.getCourses(categoryId)
   );
 
-  if (error) return <p>Erro ao carregar os cursos da categoria {categoryName}</p>;
-  if (!data) {
-    return <PageSpinner />
+  if (error) {
+    return <p className="text-center text-danger">Erro ao carregar os cursos da categoria "{categoryName}". Tente novamente mais tarde.</p>;
   }
+
+  if (!data) {
+    return <PageSpinner />;
+  }
+
+  // Verifica se a lista de cursos está presente
+  const courses = data.data.courses || [];
 
   return (
     <>
-    <p className={styles.titleCategory}>{categoryName}</p>
-    <SlideComponent course={data.data.courses} />
+      <p className={styles.titleCategory}>{categoryName}</p>
+      {courses.length > 0 ? (
+        <SlideComponent course={courses} />
+      ) : (
+        <p className="text-center">Nenhum curso disponível nesta categoria.</p>
+      )}
     </>
   );
 };

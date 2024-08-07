@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import styles from "../../../../../styles/profile.module.scss";
 import { FormEvent, useEffect, useState } from "react";
@@ -17,49 +16,70 @@ const UserForm = function () {
   const [email, setEmail] = useState<string>("");
   const [initialEmail, setInitialEmail] = useState<string>("");
   const [created_at, setCreated_at] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    profileService.fetchCurrent().then((user) => {
-      setFirstName(user.firstName || "");
-      setLastName(user.lastName || "");
-      setPhone(user.phone || "");
-      setEmail(user.email || "");
-      setInitialEmail(user.email || "");
-      setCreated_at(user.createdAt || "");
-    });
+    const fetchUserData = async () => {
+      try {
+        const user = await profileService.fetchCurrent();
+        setFirstName(user.firstName || "");
+        setLastName(user.lastName || "");
+        setPhone(user.phone || "");
+        setEmail(user.email || "");
+        setInitialEmail(user.email || "");
+        setCreated_at(user.createdAt || "");
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const handleUserUpdate = async function (event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const res = await profileService.userUpdate({
-      firstName,
-      lastName,
-      phone,
-      email,
-      created_at,
-    });
+    if (loading) return;
 
-    if (res === 200) {
-      setToastIsOpen(true);
-      setErrorMessage("Informações alteradas com sucesso!");
-      setColor("bg-success");
-      setTimeout(() => setToastIsOpen(false), 1000 * 3);
-      if (email !== initialEmail) {
-        sessionStorage.clear();
-        router.push("/");
+    try {
+      const res = await profileService.userUpdate({
+        firstName,
+        lastName,
+        phone,
+        email,
+        created_at,
+      });
+
+      if (res === 200) {
+        setToastIsOpen(true);
+        setErrorMessage("Informações alteradas com sucesso!");
+        setColor("bg-success");
+        if (email !== initialEmail) {
+          sessionStorage.clear();
+          router.push("/");
+        }
+      } else {
+        setToastIsOpen(true);
+        setErrorMessage("Você não pode mudar para esse email!");
+        setColor("bg-danger");
       }
-    } else {
+    } catch (error) {
+      console.error("Error updating user data:", error);
       setToastIsOpen(true);
-      setErrorMessage("Você não pode mudar para esse email!");
+      setErrorMessage("Ocorreu um erro ao atualizar as informações.");
       setColor("bg-danger");
-      setTimeout(() => setToastIsOpen(false), 1000 * 3);
+    } finally {
+      setTimeout(() => setToastIsOpen(false), 3000);
     }
   };
 
   // Formatação da data
   const date = created_at ? new Date(created_at) : new Date();
   const month = date.toLocaleDateString("default", { month: "long" });
+
+  if (loading) return <p>Loading...</p>; // Exibir carregando enquanto os dados estão sendo recuperados
 
   return (
     <>

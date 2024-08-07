@@ -1,6 +1,6 @@
 import Head from "next/head";
-import HeaderGeneric from "../src/components/common/headerGeneric";
-import styles from "../styles/registerLogin.module.scss";
+import HeaderGeneric from "@/src/components/common/headerGeneric";
+import styles from "@/styles/registerLogin.module.scss";
 import { Button, Container, Form, FormGroup, Label, Input } from "reactstrap";
 import Footer from "@/src/components/common/footer";
 import { useRouter } from "next/router";
@@ -20,18 +20,18 @@ const Login = function () {
     }
   }, [router]);
 
-  const registerSucess = router.query.registred;
+  const registerSuccess = router.query.registered;
 
   useEffect(() => {
-    if (registerSucess === "true") {
+    if (registerSuccess === "true") {
       setToastColor("bg-success");
       setToastMessage("Cadastro feito com sucesso!");
       setToastIsOpen(true);
       setTimeout(() => {
         setToastIsOpen(false);
-      }, 1000 * 3);
+      }, 3000);
     }
-  }, [registerSucess, router.query]);
+  }, [registerSuccess, router.query]);
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,7 +51,7 @@ const Login = function () {
       setToastIsOpen(true);
       setTimeout(() => {
         setToastIsOpen(false);
-      }, 1000 * 3);
+      }, 3000);
     }
   };
 

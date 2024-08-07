@@ -7,22 +7,38 @@ import HeaderAuth from "../src/components/common/headerAuth";
 import SearchCard from "@/src/components/common/searchCard";
 import Footer from "@/src/components/common/footer";
 import styles from "../styles/search.module.scss";
+import PageSpinner from "@/src/components/common/spinner";
 
 const Search = function () {
   const router = useRouter();
-  const searchName: string | undefined = typeof router.query.name === "string" ? router.query.name : undefined;
+  const searchName = typeof router.query.name === "string" ? router.query.name : "";
   const [searchResult, setSearchResult] = useState<CourseType[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const searchCourses = useCallback(async () => {
     if (searchName) {
-      const res = await courseService.getSearch(searchName);
-      setSearchResult(res.data.courses);
+      try {
+        const res = await courseService.getSearch(searchName);
+        setSearchResult(res.data.courses);
+      } catch (error) {
+        console.error("Failed to fetch search results:", error);
+        setSearchResult([]);
+      }
     }
   }, [searchName]);
 
   useEffect(() => {
-    searchCourses();
-  }, [searchCourses]);
+    if (sessionStorage.getItem("vocabely-token")) {
+      searchCourses();
+      setLoading(false);
+    } else {
+      router.push("/login");
+    }
+  }, [searchCourses, router]);
+
+  if (loading) {
+    return <PageSpinner />;
+  }
 
   return (
     <>

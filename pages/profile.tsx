@@ -1,14 +1,30 @@
 import Head from "next/head";
-import styles from "../styles/profile.module.scss";
+import styles from "@/styles/profile.module.scss";
 import UserForm from "@/src/components/common/profile/user";
 import PasswordForm from "@/src/components/common/profile/password";
 import { Col, Container, Row, Button } from "reactstrap";
 import HeaderAuth from "@/src/components/common/headerAuth";
 import Footer from "@/src/components/common/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import PageSpinner from "@/src/components/common/spinner";
 
-const UserInfo = function () {
+const UserInfo = () => {
   const [form, setForm] = useState("userForm");
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("vocabely-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, [router]);
+
+  if (loading) {
+    return <PageSpinner />;
+  }
 
   return (
     <>
