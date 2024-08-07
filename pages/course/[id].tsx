@@ -24,7 +24,7 @@ const CoursePage = function () {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   if (loading) {
     return <PageSpinner />;
@@ -42,7 +42,9 @@ const CoursePage = function () {
   };
 
   useEffect(() => {
-    getCourse();
+    if (id) {
+      getCourse();
+    }
   }, [id]);
 
   const handleLikeCourse = async () => {
